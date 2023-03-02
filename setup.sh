@@ -11,3 +11,10 @@ pip install -r requirements.txt
 
 #upgrade PIP
 pip install --upgrade pip
+
+#activate the virtual environment
+source .venv/bin/activate
+
+#create a blank .env file
+touch .env
+echo "SUBSCRIPTION_ID=''" > .env
