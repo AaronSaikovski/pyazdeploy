@@ -110,8 +110,9 @@ def main():
     #target_subscription_id = os.getenv("TARGET_AZURE_SUBSCRIPTION_ID")
     #target_resource_group = os.getenv("TARGET_RESOURCE_GROUP_NAME")
 
+    #account_response = az_cli.invoke(['account', 'show', '--subscription', subscription_id])
     #Login to Azure for the given Subscription
-    check_azure_login(az_cli, subscription_id)
+    #check_azure_login(az_cli, subscription_id)
 
 
 
