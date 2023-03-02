@@ -120,3 +120,4 @@ def print_bold_message(message_string):
     nothing - prints formatted output.
     """
     print(f'{__BOLD}{message_string}{__ENDC}')
+    

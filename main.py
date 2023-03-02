@@ -51,6 +51,12 @@ def check_azure_login(az_cli, subscription_id):
     nothing
         Logs in if not logged on
     """
+    #check if Subscription is valid
+    if len(subscription_id) == 0:
+        console_helper.print_error_message("##ERROR - SubscriptionID is blank!")
+        sys.exit(-1) #TODO throw an exception
+
+
     #Get subscription info if logged in
     account_response = az_cli.invoke(['account', 'show', '--subscription', subscription_id])
     if account_response == 0:
@@ -110,9 +116,8 @@ def main():
     #target_subscription_id = os.getenv("TARGET_AZURE_SUBSCRIPTION_ID")
     #target_resource_group = os.getenv("TARGET_RESOURCE_GROUP_NAME")
 
-    #account_response = az_cli.invoke(['account', 'show', '--subscription', subscription_id])
     #Login to Azure for the given Subscription
-    #check_azure_login(az_cli, subscription_id)
+    check_azure_login(az_cli, subscription_id)
 
 
 
