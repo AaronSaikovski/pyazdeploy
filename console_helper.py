@@ -31,17 +31,17 @@ __version__ = "0.0.1"
 
 """Private color constants to print in the console constants for this module 
 """
-__BLUE = '\033[94m'
-__CYAN = '\033[96m'
-__OK_GREEN = '\033[92m'
-__WARNING = '\033[93m'
-__ERROR = '\033[91m'
-__ENDC = '\033[0m'
-__BOLD = '\033[1m'
-__UNDERLINE = '\033[4m'
+__BLUE: str = '\033[94m'
+__CYAN: str = '\033[96m'
+__OK_GREEN: str = '\033[92m'
+__WARNING: str = '\033[93m'
+__ERROR: str = '\033[91m'
+__ENDC: str = '\033[0m'
+__BOLD: str = '\033[1m'
+__UNDERLINE: str = '\033[4m'
 
 
-def print_ok_message(message_string):
+def print_ok_message(message_string: str):
     """Prints an OK message using the console with the colour constant - __OK_GREEN
 
     Parameters
@@ -54,7 +54,7 @@ def print_ok_message(message_string):
     """
     print(f'{__OK_GREEN}{message_string}{__ENDC}')
 
-def print_warning_message(message_string):
+def print_warning_message(message_string: str):
     """Prints a Warning message using the console with the colour constant - __WARNING
 
     Parameters
@@ -67,7 +67,7 @@ def print_warning_message(message_string):
     """
     print(f'{__WARNING}{message_string}{__ENDC}')
 
-def print_error_message(message_string):
+def print_error_message(message_string: str):
     """Prints an Error message using the console with the colour constant - __ERROR
 
     Parameters
@@ -81,7 +81,7 @@ def print_error_message(message_string):
     print(f'{__ERROR}{message_string}{__ENDC}')
 
 
-def print_confirmation_message(message_string):
+def print_confirmation_message(message_string: str):
     """Prints an confirmation message using the console with the colour constant - __BLUE
 
     Parameters
@@ -94,7 +94,7 @@ def print_confirmation_message(message_string):
     """
     print(f'{__BLUE}{message_string}{__ENDC}')
 
-def print_command_message(message_string):
+def print_command_message(message_string: str):
     """Prints an command to run message using the console with the colour constant - __CYAN
 
     Parameters
@@ -108,7 +108,7 @@ def print_command_message(message_string):
     print(f'{__CYAN}{message_string}{__ENDC}')
 
 
-def print_bold_message(message_string):
+def print_bold_message(message_string: str):
     """Prints a bold message using the console with the colour constant - __BOLD
 
     Parameters

@@ -1,0 +1,5 @@
+#Copy these constants and populate into your own .env file
+SUBSCRIPTION_ID=""
+LOCATION=""
+ENVIRONMENT="TEST"
+RESOURCE_GROUP_NAME="python--deploy-test"
