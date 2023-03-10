@@ -23,86 +23,13 @@ __version__ = "0.0.1"
 
 import os
 import sys
-import json
-import pprint
 from azure.cli.core import get_default_cli
 from dotenv import load_dotenv
 import console_helper
 
+import azlogin
+import azdeploy
 
-def check_azure_login(az_cli: object, subscription_id: str) -> None:
-    """Checks to see if we are logged into Azure, will login if not logged in.
-    Parameters
-    ----------
-    az_cli : object 
-        Azure CLI Object
-    subscription_id : string
-        Azure Subscription ID
-
-    Returns
-    -------
-    nothing
-        Logs in if not logged on
-    """
-    # Check if Subscription is valid
-    if len(subscription_id) == 0:
-        console_helper.print_error_message("##ERROR - SubscriptionID is blank!")
-        sys.exit(-1)
-
-    # Get subscription info if logged in
-    account_response = az_cli.invoke(['account', 'show', '--subscription', subscription_id])
-    if account_response == 0:
-        subscription_name: str = az_cli.result.result['name']
-        # pylint: disable=line-too-long
-        console_helper.print_confirmation_message(f"Deploying into subscription: '{subscription_name}' with Id: '{subscription_id}'")
-    else:
-        # pylint: disable=line-too-long
-        console_helper.print_warning_message('You are not logged in to Azure CLI. Attempting to login...')
-        az_cli.invoke(['login'])
-        az_cli.invoke(['account', 'set', '--subscription', subscription_id])
-
-
-def deploy_template(az_cli: object,
-                    template_name: str,
-                    location: str,
-                    template_params: dict) -> None:
-    """Deploys an ARM or Bicep template with given parameters.
-    Parameters
-    ----------
-    az_cli : object 
-        Azure CLI Object
-    template_name : string
-        Template name/path to deploy
-    location : string
-        Azure region to deploy to
-    template_params: dict
-        Parameter dictionary to pass into the deployment.
-
-    Returns
-    -------
-    nothing
-        Displays output status of the deployment.
-    """
-    # Do the deployment
-    az_cli.invoke(['deployment',
-            'sub',
-            'create',
-            '-l',
-            location,
-            '--template-file',
-            template_name,
-            '--parameters',
-            json.dumps(template_params)
-            ])
-
-    # Check for deployment results.
-    if not az_cli.result.result['properties']['error']:
-        console_helper.print_ok_message("Successfully deployed the template deployment.")
-    else:
-        # pylint: disable=line-too-long
-        console_helper.print_error_message("Failed to deploy the template deployment. Review the error message below:")
-        pprint.pprint(az_cli.result.result)
-        sys.exit(-1)
 
 
 def main() -> None:
@@ -135,7 +62,7 @@ def main() -> None:
     environment = os.getenv("ENVIRONMENT")
 
     # Login to Azure for the given Subscription
-    check_azure_login(az_cli, subscription_id)
+    azlogin.check_azure_login(az_cli, subscription_id)
 
     # get the environment variables from the .env file.
     template_parameters = {
@@ -145,7 +72,7 @@ def main() -> None:
     }
 
     #do the deployment
-    deploy_template(az_cli,
+    azdeploy.deploy_template(az_cli,
                     "main.bicep", 
                     location,
                     template_parameters)

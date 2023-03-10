@@ -2,4 +2,4 @@
 SUBSCRIPTION_ID=""
 LOCATION=""
 ENVIRONMENT="TEST"
-RESOURCE_GROUP_NAME="python--deploy-test"
+RESOURCE_GROUP_NAME="python-deploy-test"
